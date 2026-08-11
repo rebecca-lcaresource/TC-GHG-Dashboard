@@ -1,0 +1,17 @@
+ef_id,ef_year,scope,category,fuel_or_substance,unit,ef_kgco2e,reporting_treatment,status,provisional_rationale,source,applies_to,ef_state
+EF-S1-001,2025,Scope 1,Stationary Combustion,Diesel,litres,2.57082,Standard,Verified,,DEFRA 2025,"TC-FAC-001, 003, 004, 005",Active
+EF-S1-002,2025,Scope 1,Stationary Combustion,LPG,litres,1.55713,Standard,Verified,,DEFRA 2025,"TC-FAC-001, 002, 005",Active
+EF-S1-003,2025,Scope 1,Stationary Combustion,Natural gas,kWh (Gross CV),0.18296,Standard,Verified,,DEFRA 2025,"TC-FAC-002, 003, 004",Active
+EF-S1-004,2025,Scope 1,Mobile Combustion,Diesel,litres,2.57082,Standard,Verified,,DEFRA 2025,All plants,Active
+EF-S1-005,2025,Scope 1,Mobile Combustion,Petrol,litres,2.06916,Standard,Verified,,DEFRA 2025,All plants,Active
+EF-S1-006,2025,Scope 1,Fugitive Emissions,R-410A,kg,1924,Standard,Verified,,IPCC AR5 GWP,"TC-FAC-001, 002, 003, 005",Active
+EF-S1-007,2025,Scope 1,Fugitive Emissions,R-134a,kg,1300,Standard,Verified,,IPCC AR5 GWP,"TC-FAC-001, 003, 004",Active
+EF-S1-008,2025,Scope 1,Fugitive Emissions,R-32,kg,677,Standard,Verified,,IPCC AR5 GWP,TC-FAC-002,Active
+EF-S1-009,2025,Scope 1,Fugitive Emissions,SF6,kg,23500,Standard,Verified,,IPCC AR5 GWP,TC-FAC-004,Active
+EF-S1-010,2025,Scope 1,Fugitive Emissions,R-22,kg,1760,Montreal Protocol,Verified,,IPCC AR5 GWP,TC-FAC-005,Active
+EF-S2-L01,2025,Scope 2,Purchased Electricity,Grid electricity,kWh,0.681,Standard,Verified,,National grid factor (Vietnam),TC-FAC-001,Active
+EF-S2-L02,2025,Scope 2,Purchased Electricity,Grid electricity,kWh,0.444,Standard,Verified,,National grid factor (Mexico),TC-FAC-002,Active
+EF-S2-L03,2025,Scope 2,Purchased Electricity,Grid electricity,kWh,0.5306,Standard,Verified,,National grid factor (China),TC-FAC-003,Active
+EF-S2-L04,2025,Scope 2,Purchased Electricity,Grid electricity,kWh,0.597,Standard,Verified,,National grid factor (Poland),TC-FAC-004,Active
+EF-S2-L05,2025,Scope 2,Purchased Electricity,Grid electricity,kWh,0.7117,Standard,Verified,,National grid factor (India),TC-FAC-005,Active
+EF-S2-DH01,2025,Scope 2,Purchased Heat,District heating,kWh,0.33,Standard,Provisional,"Interim factor, not yet verified against a primary national source.",Interim source (see rationale),TC-FAC-004,Active

@@ -1,0 +1,8 @@
+category,fuel_or_substance,unit,quantity
+Fugitive Emissions,R-32,kg,126.0
+Fugitive Emissions,R-410A,kg,66.5
+Mobile Combustion,Diesel,litres,119456.7
+Mobile Combustion,Petrol,litres,79156.5
+Purchased Electricity,Grid electricity,kWh,9323986.5
+Stationary Combustion,LPG,litres,373627.7
+Stationary Combustion,Natural gas,kWh (Gross CV),6504256.1
