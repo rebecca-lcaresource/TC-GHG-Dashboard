@@ -4,41 +4,72 @@
 > anything. Update it at every save point. Replace content — do not append.
 > History lives in git.
 
-**Session:** 0 — build not started
-**Last updated:** 2026-08-10 — by Project Governor, pre-build
+**Session:** 1 — first build complete
+**Last updated:** 2026-08-11 — by Claude Code
 **Live URL:** none yet [Rule: fill in after the first successful deploy]
 
 ## Current state
-Nothing built. Repo contains CLAUDE.md, PROGRESS.md, product-spec.md, the six data files (TC-FAC-001_2026_Q1.csv … TC-FAC-005_2026_Q1.csv, emission_factor_register_2025.csv), and LCA_CO_TEMPLATE_NewBranding.docx.
-[Rule: this section describes what exists and works right now — never what is planned. Completed checklist items get absorbed here in compressed form.]
+The dashboard is fully built and verified against every Section 13 control total.
+- React + Vite + Tailwind single-page app. The six source CSVs are bundled from
+  `src/data/` (imported `?raw`, parsed at runtime, never mutated).
+- Calculation engine (`src/lib/calc.js`) implements plant-aware factor matching
+  (all five conditions), `applies_to` normalisation, per-scope / per-category /
+  per-plant / all-plants aggregation, and the provisional / Montreal Protocol /
+  unmatched / multi-match edge cases. All-plants totals reproduce exactly:
+  Scope 1 = 19,383.5 · Scope 2 = 32,471.7 · Combined = 51,855.1 tCO₂e, and every
+  per-plant total matches criteria 4–8.
+- UI: header band (logo + title + methodology + 2026 Q1 badge), plant selector
+  defaulting to "All Plants (Total)", headline Scope 1 / Scope 2 / Combined
+  metrics, by-category chart + table (Recharts, Sage & Oak palette), emission-
+  factor sources panel, data-quality flags panel, export controls, footer. The
+  selector re-scopes every panel.
+- Exports (browser-only): CSV = full result set (all plants + total, 1 dp) with
+  plant/scope/category/tCO₂e/period/sources columns; PDF = branded A4 snapshot of
+  the current selection via a dedicated off-screen print surface (html2canvas +
+  jsPDF), ~0.5 MB.
+- Sage & Oak branding applied (palette, Open Sans / EB Garamond web fonts, logo
+  extracted from the branding template into `public/assets/`). Responsive on
+  desktop and mobile. `netlify.toml` configured for GitHub → Netlify deploy.
 
 ## Last session
-None — the first build session has not happened yet.
-[Rule: 3–5 lines maximum. Replace each session — what was built, changed, or fixed.]
+Session 1: ran First Session Setup (organised spec/data/branding/logo), built the
+calc engine and verified all 18 acceptance criteria in a headless browser, built
+the dashboard UI + both exports, applied branding, confirmed desktop + mobile
+render. Deployment not performed — see Known issues.
 
 ## Remaining work
-- [ ] Builder: create the GitHub repo and upload CLAUDE.md, PROGRESS.md, product-spec.md, the six CSVs, and LCA_CO_TEMPLATE_NewBranding.docx to the root
-- [ ] First Session Setup: create docs/, move the spec and branding template into it, move the six CSVs into src/data/, commit (see CLAUDE.md Session Protocol)
-- [ ] Extract the LCA Resource logo from the branding template into /public/assets — ask the builder for the file if extraction is not clean
-- [ ] Build the calculation engine: parse the six CSVs, apply plant-aware factor matching, aggregate by scope, category, plant, and all-plants total (spec Section 9)
-- [ ] Build the Main Dashboard — header band, plant selector defaulting to "All Plants (Total)", headline Scope 1 / Scope 2 / Combined metrics, by-category chart and table, emission-factor sources panel, data-quality flags panel, export controls, footer (spec Section 8)
-- [ ] Wire the Export arm: browser-side PDF snapshot of the current selection and CSV of the full result set (spec Section 3)
-- [ ] Apply Sage & Oak branding — palette, fonts, logo, editorial layout (CLAUDE.md Brand)
-- [ ] Local test pass — plant selector re-scopes every panel, both exports download correctly, desktop and mobile
-- [ ] Acceptance criteria pass — verify all 18 criteria in spec Section 13, including the all-plants control totals (Scope 1 = 19,383.5 · Scope 2 = 32,471.7 · Combined = 51,855.1 tCO₂e) and every per-plant total, before deploy
-- [ ] Deploy to Netlify via MCP — create the site and publish
+- [ ] Deploy to Netlify and record the Live URL above. No Netlify MCP is
+      available in this remote environment, so the site was not created here.
+      Deploy path: connect the repo to Netlify (auto-deploy from `main`, build
+      `npm run build`, publish `dist/` — already set in `netlify.toml`), or run
+      the Netlify MCP from Claude Desktop where it is active.
 [Rule: completed items leave this list and are absorbed into Current state. This list only shrinks.]
 
 ## Build decisions
-None yet.
-[Rule: one line per decision made during the build that is not in the spec — prompt structures, field formats, naming choices, library picks. Future sessions depend on these to stay consistent.]
+- CSVs imported with Vite `?raw` and parsed by a small quote-aware parser
+  (`src/lib/csv.js`) — keeps the six files read-only, bundled at build time.
+- Recharts for the category bar chart; html2canvas + jsPDF for the browser-side
+  PDF; no chart/PDF server or third-party service.
+- Built lightweight Tailwind components instead of full shadcn/ui — same clean
+  editorial feel with fewer dependencies for a single-screen tool.
+- Totals accumulated in kg then converted to tonnes; display rounded to 1 dp.
+  Category rows rounded to 1 dp may sum to ±0.1 of a scope headline (standard
+  display-rounding artifact) — headlines use full precision, never tuned.
+- PDF image embedded as JPEG q0.95 at scale 2 to keep the file ~0.5 MB.
+- Category → colour map is fixed in `src/lib/ui.js` so each category keeps the
+  same Sage & Oak colour in chart, table swatch, and PDF.
 
 ## Known issues
-- Logo extraction from LCA_CO_TEMPLATE_NewBranding.docx may not be clean — fallback is for the builder to supply the logo image file directly (spec Section 15).
-- Century Gothic and Garamond are not reliably available as web fonts — Open Sans and a web-safe serif are the intended substitutes. Confirm the rendered result looks right before first deployment.
-- Display unit is tCO₂e throughout. Change only if the builder decides otherwise.
-- The Netlify URL is public and unauthenticated, so The Corporate's plant-level activity data and computed emissions will be world-readable to anyone with the link. Confirm the client is comfortable with that before sharing the URL; restricting access would require login and therefore a different tier.
-[Rule: bugs, edge cases, and deferred fixes. One line each. Remove when resolved.]
+- Not yet deployed — no Live URL. Netlify MCP is not available in this remote
+  environment (see Remaining work).
+- Century Gothic / Garamond are not web fonts; Open Sans and EB Garamond are the
+  intended substitutes and render cleanly.
+- The Netlify URL will be public and unauthenticated — The Corporate's plant-level
+  activity data and computed emissions will be world-readable to anyone with the
+  link. Confirm the client is comfortable before sharing; restricting access would
+  require login and a different tier.
+- Production JS bundle is ~1.1 MB (Recharts + jsPDF + html2canvas). Acceptable for
+  a single-viewer internal tool; could be code-split later if needed.
 
 ## Notes for next session
 None.

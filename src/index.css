@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-ground text-charcoal font-body antialiased;
+    font-feature-settings: 'liga' 1, 'kern' 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-teal;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl bg-white/70 backdrop-blur-sm ring-1 ring-black/5 shadow-sm;
+  }
+
+  .panel-title {
+    @apply font-heading text-teal text-sm font-semibold uppercase tracking-[0.14em];
+  }
+}
+
+/* Tabular numerals so large figures align cleanly */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Print / PDF snapshot surface — kept off-screen but renderable by html2canvas */
+.pdf-surface {
+  width: 794px; /* ~A4 width at 96dpi */
+  background: #ffffff;
+  color: #4c483d;
+}
