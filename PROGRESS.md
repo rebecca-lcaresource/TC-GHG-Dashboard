@@ -38,11 +38,17 @@ the dashboard UI + both exports, applied branding, confirmed desktop + mobile
 render. Deployment not performed — see Known issues.
 
 ## Remaining work
-- [ ] Deploy to Netlify and record the Live URL above. No Netlify MCP is
-      available in this remote environment, so the site was not created here.
-      Deploy path: connect the repo to Netlify (auto-deploy from `main`, build
-      `npm run build`, publish `dist/` — already set in `netlify.toml`), or run
-      the Netlify MCP from Claude Desktop where it is active.
+- [ ] Deploy to Netlify and record the Live URL above. Netlify MCP is NOT active
+      for this project — deployment is manual, the same path used for the other
+      Corporate suite tools. In the Netlify dashboard:
+      1. Add new project → Import an existing project → GitHub → select
+         `rebecca-lcaresource/TC-GHG-Dashboard`.
+      2. Settings — Branch to deploy: `main` · Build command: `npm run build` ·
+         Publish directory: `dist` · Base directory: (leave blank).
+      3. Deploy. Netlify then rebuilds automatically on every push to `main`.
+      (These build settings are also declared in `netlify.toml`. `vite.config.js`
+      sets `base: '/'` for domain-root serving. There is no GitHub Pages workflow
+      in the repo — Netlify is the only deploy path.)
 [Rule: completed items leave this list and are absorbed into Current state. This list only shrinks.]
 
 ## Build decisions
@@ -60,8 +66,8 @@ render. Deployment not performed — see Known issues.
   same Sage & Oak colour in chart, table swatch, and PDF.
 
 ## Known issues
-- Not yet deployed — no Live URL. Netlify MCP is not available in this remote
-  environment (see Remaining work).
+- Not yet deployed — no Live URL. Netlify MCP is not active for this project;
+  the builder creates the Netlify site manually (see Remaining work).
 - Century Gothic / Garamond are not web fonts; Open Sans and EB Garamond are the
   intended substitutes and render cleanly.
 - The Netlify URL will be public and unauthenticated — The Corporate's plant-level
