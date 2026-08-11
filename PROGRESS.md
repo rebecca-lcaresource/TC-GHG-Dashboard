@@ -4,9 +4,9 @@
 > anything. Update it at every save point. Replace content — do not append.
 > History lives in git.
 
-**Session:** 1 — first build complete
+**Session:** 1 — first build complete and deployed
 **Last updated:** 2026-08-11 — by Claude Code
-**Live URL:** none yet [Rule: fill in after the first successful deploy]
+**Live URL:** https://tc-ghg-dashboard.netlify.app
 
 ## Current state
 The dashboard is fully built and verified against every Section 13 control total.
@@ -29,26 +29,21 @@ The dashboard is fully built and verified against every Section 13 control total
   jsPDF), ~0.5 MB.
 - Sage & Oak branding applied (palette, Open Sans / EB Garamond web fonts, logo
   extracted from the branding template into `public/assets/`). Responsive on
-  desktop and mobile. `netlify.toml` configured for GitHub → Netlify deploy.
+  desktop and mobile. Live on Netlify at https://tc-ghg-dashboard.netlify.app,
+  which auto-rebuilds on every push to `main` (build `npm run build`, publish
+  `dist`; settings mirrored in `netlify.toml`, `vite.config.js` base `/`).
 
 ## Last session
 Session 1: ran First Session Setup (organised spec/data/branding/logo), built the
 calc engine and verified all 18 acceptance criteria in a headless browser, built
 the dashboard UI + both exports, applied branding, confirmed desktop + mobile
-render. Deployment not performed — see Known issues.
+render, merged to `main` (PR #1), and deployed to Netlify — confirmed live and
+working. Build complete.
 
 ## Remaining work
-- [ ] Deploy to Netlify and record the Live URL above. Netlify MCP is NOT active
-      for this project — deployment is manual, the same path used for the other
-      Corporate suite tools. In the Netlify dashboard:
-      1. Add new project → Import an existing project → GitHub → select
-         `rebecca-lcaresource/TC-GHG-Dashboard`.
-      2. Settings — Branch to deploy: `main` · Build command: `npm run build` ·
-         Publish directory: `dist` · Base directory: (leave blank).
-      3. Deploy. Netlify then rebuilds automatically on every push to `main`.
-      (These build settings are also declared in `netlify.toml`. `vite.config.js`
-      sets `base: '/'` for domain-root serving. There is no GitHub Pages workflow
-      in the repo — Netlify is the only deploy path.)
+- [ ] Nothing outstanding for v1.0. Next quarter: replace the six bundled CSVs in
+      `src/data/` on a fresh branch off `main`, verify the new totals, open a PR,
+      merge — Netlify redeploys automatically.
 [Rule: completed items leave this list and are absorbed into Current state. This list only shrinks.]
 
 ## Build decisions
@@ -66,8 +61,6 @@ render. Deployment not performed — see Known issues.
   same Sage & Oak colour in chart, table swatch, and PDF.
 
 ## Known issues
-- Not yet deployed — no Live URL. Netlify MCP is not active for this project;
-  the builder creates the Netlify site manually (see Remaining work).
 - Century Gothic / Garamond are not web fonts; Open Sans and EB Garamond are the
   intended substitutes and render cleanly.
 - The Netlify URL will be public and unauthenticated — The Corporate's plant-level
