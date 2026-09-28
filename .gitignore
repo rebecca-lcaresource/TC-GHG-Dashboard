@@ -5,3 +5,8 @@ dist-ssr
 .DS_Store
 .vite
 npm-debug.log*
+
+# Secrets
+.env
+.env.*
+_secrets/
